@@ -1,0 +1,90 @@
+Usage: validator.rb [options] dir ...
+	Checks that all files in the directory list given are valid requests.
+	(Hidden files and files ending in ".rb" are omitted.)
+Options:
+    -l, --[no-]length-required       Require that POST requests contain a content-length header
+    -v, --[no-]verbose               Verbose output
+    -h, --help                       Print help
+
+The program, validator.rb, scans files in the specified directories,
+validating each according to provided rules.  The rules are that the
+files must contain:
+
+ A request line consisting of a method, path, and version separated by whitespace
+
+    Method: “GET” or “POST”
+    Path: Any relative path, e.g., “/offer/1”
+    Version: “HTTP/1.1”
+
+ Zero or more headers consisting of a name and value separated by a colon
+
+    Name: “Accept”, “Host”, or “Referer”
+    Value: One or more characters
+
+ One blank line
+ A body consisting of zero or more characters
+
+
+To run the program against sample data:
+
+  ./validate.rb test/data
+
+To run unit tests and generate test coverage:
+
+  ruby test/unit/test_request_validator.rb
+
+Code coverage is in coverage/index.html.
+
+Documentation is in doc/index.html. To generate the documentation, run:
+
+  rdoc -x test -x debug -x coverage
+
+The validator.rb script uses the RequestValidator object to validate
+each file.  The script parses the command line and calls
+RequestValidator to examine each file it finds in the list of
+directories given.  Hidden files and Ruby files are skipped.
+
+Validation of a file does not stop at the first error and all errors
+encountered are reported.
+
+Unit tests for RequestValidator are provided in
+test/unit/test_request_validator.rb. Test data for validator.rb is
+provided in the test/data directory.  These tests include both valid and
+invalid examples.
+
+NOTE: Run, "chmod 200 /test/data/invalid_permissions.request" before
+running tests.  This will cause a particular error path to be tested.
+The file cannot be committed with such permissions so it is committed
+with "600" permissions.
+
+The unit tests automatically generate test coverage output which is
+stored in the coverage directory.
+
+The debug directory was used to hold a single example file while debugging
+and one might use this by running:
+
+  ./validator.rb -v debug
+
+The verbose output will usually give sufficient information as to why an
+error took place.
+
+The implementation uses WEBrick to parse the file.  Some errors messages
+come from WEBrick and these can be less informative than one might wish.
+For example, in the case of malformed request lines, the message is
+simply, "bad Request-Line", without further explanation.  Such a message
+may be sufficient for the purpose at hand but if more detail is needed,
+a custom request line parser needs to be written.
+
+A valid POST request contains a content-length header.  Since this is
+not in the list of headers given, the program provides a flag to require
+or omit tests for this header.  WEBrick always complains but the program
+supresses that unless instructed otherwise.
+
+The blank line is considered optional if no body is provided. If a body
+is provided without a blank line, it is treated like a header, causing
+the file to be rejected.
+
+WEBrick is insensitive to line ends, treating "\r\n" and "\n" as
+equivalent. Changing that behavior would require detecting undesired
+line ends outside of WEBrick.
+

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>File: README [RDoc Documentation]</title>
+
+	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+</head>
+
+<body class="file">
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./README.html">README</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./HTTPValidator.html">HTTPValidator</a></li>
+				
+					<li><a href="./HTTPValidator/RequestValidator.html">HTTPValidator::RequestValidator</a></li>
+				
+					<li><a href="./HTTPValidator/Walker.html">HTTPValidator::Walker</a></li>
+				
+					<li><a href="./LogSimple.html">LogSimple</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<p>
+Usage: <a href="validator_rb.html">validator.rb</a> [options] dir &#8230;
+</p>
+<pre>
+        Checks that all files in the directory list given are valid requests.
+        (Hidden files and files ending in &quot;.rb&quot; are omitted.)
+</pre>
+<p>
+Options:
+</p>
+<pre>
+    -l, --[no-]length-required       Require that POST requests contain a content-length header
+    -v, --[no-]verbose               Verbose output
+    -h, --help                       Print help
+</pre>
+<p>
+The program, <a href="validator_rb.html">validator.rb</a>, scans files in
+the specified directories, validating each according to provided rules. 
+The rules are that the files must contain:
+</p>
+<pre>
+ A request line consisting of a method, path, and version separated by whitespace
+
+    Method: “GET” or “POST”
+    Path: Any relative path, e.g., “/offer/1”
+    Version: “HTTP/1.1”
+
+ Zero or more headers consisting of a name and value separated by a colon
+
+    Name: “Accept”, “Host”, or “Referer”
+    Value: One or more characters
+
+ One blank line
+ A body consisting of zero or more characters
+</pre>
+<p>
+To run the program against sample data:
+</p>
+<pre>
+  ./validate.rb test/data
+</pre>
+<p>
+To run unit tests and generate test coverage:
+</p>
+<pre>
+  ruby test/unit/test_request_validator.rb
+</pre>
+<p>
+Code coverage is in coverage/index.html.
+</p>
+<p>
+Documentation is in doc/index.html. To generate the documentation, run:
+</p>
+<pre>
+  rdoc -x test -x debug -x coverage
+</pre>
+<p>
+The <a href="validator_rb.html">validator.rb</a> script uses the
+RequestValidator object to validate each file.  The script parses the
+command line and calls RequestValidator to examine each file it finds in
+the list of directories given.  Hidden files and Ruby files are skipped.
+</p>
+<p>
+Validation of a file does not stop at the first error and all errors
+encountered are reported.
+</p>
+<p>
+Unit tests for RequestValidator are provided in
+test/unit/test_request_validator.rb. Test data for <a
+href="validator_rb.html">validator.rb</a> is provided in the test/data
+directory.  These tests include both valid and invalid examples.
+</p>
+<p>
+NOTE: Run, &#8220;chmod 200 /test/data/invalid_permissions.request&#8220;
+before running tests.  This will cause a particular error path to be
+tested. The file cannot be committed with such permissions so it is
+committed with &#8220;600&#8221; permissions.
+</p>
+<p>
+The unit tests automatically generate test coverage output which is stored
+in the coverage directory.
+</p>
+<p>
+The debug directory was used to hold a single example file while debugging
+and one might use this by running:
+</p>
+<pre>
+  ./validator.rb -v debug
+</pre>
+<p>
+The verbose output will usually give sufficient information as to why an
+error took place.
+</p>
+<p>
+The implementation uses WEBrick to parse the file.  Some errors messages
+come from WEBrick and these can be less informative than one might wish.
+For example, in the case of malformed request lines, the message is simply,
+&#8220;bad Request-Line&#8221;, without further explanation.  Such a
+message may be sufficient for the purpose at hand but if more detail is
+needed, a custom request line parser needs to be written.
+</p>
+<p>
+A valid POST request contains a content-length header.  Since this is not
+in the list of headers given, the program provides a flag to require or
+omit tests for this header.  WEBrick always complains but the program
+supresses that unless instructed otherwise.
+</p>
+<p>
+The blank line is considered optional if no body is provided. If a body is
+provided without a blank line, it is treated like a header, causing the
+file to be rejected.
+</p>
+<p>
+WEBrick is insensitive to line ends, treating &#8220;r\n&#8220; and
+&#8220;n&#8220; as equivalent. Changing that behavior would require
+detecting undesired line ends outside of WEBrick.
+</p>
+
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>
+

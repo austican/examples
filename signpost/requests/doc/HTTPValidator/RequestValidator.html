@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: HTTPValidator::RequestValidator</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#classes">Classes</a>
+          <a href="../index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../request_validator_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="request_validator.rb">request_validator.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">Object</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-c-new">::new</a></li>
+					
+					<li><a href="#method-i-errors">#errors</a></li>
+					
+					<li><a href="#method-i-invalid">#invalid</a></li>
+					
+					<li><a href="#method-i-valid_body%3F">#valid_body?</a></li>
+					
+					<li><a href="#method-i-valid_header%3F">#valid_header?</a></li>
+					
+					<li><a href="#method-i-valid_http_version%3F">#valid_http_version?</a></li>
+					
+					<li><a href="#method-i-valid_request%3F">#valid_request?</a></li>
+					
+					<li><a href="#method-i-valid_request_method%3F">#valid_request_method?</a></li>
+					
+					<li><a href="#method-i-valid_uri%3F">#valid_uri?</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="../README.html">README</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../HTTPValidator.html">HTTPValidator</a></li>
+				
+					<li><a href="../HTTPValidator/RequestValidator.html">HTTPValidator::RequestValidator</a></li>
+				
+					<li><a href="../HTTPValidator/Walker.html">HTTPValidator::Walker</a></li>
+				
+					<li><a href="../LogSimple.html">LogSimple</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">HTTPValidator::RequestValidator</h1>
+
+		<div id="description">
+			<p>
+Signpost&#8217;s Offer Exchange (SOX), an industry leading marketplace for
+daily deals day trading, has been experiencing outages over the past few
+months which have been attributed to an influx of malformed HTTP requests
+from high-frequency traders Goldstone Bags and Blueman Group. As such,
+we&#8217;ve decided to have you implement a basic request validator based
+upon a simplified version of the HTTP 1.1 specification. A request must
+meet the following criteria to be considered valid:
+</p>
+<ul>
+<li><p>
+A request line consisting of a method, path, and version separated by
+whitespace
+</p>
+<ul>
+<li><p>
+Method: &#8220;GET&#8221; or &#8220;POST&#8220;
+</p>
+</li>
+</ul>
+<ul>
+<li><p>
+Path: Any relative path, e.g., &#8220;/offer/1&#8220;
+</p>
+</li>
+</ul>
+<ul>
+<li><p>
+Version: &#8220;HTTP/1.1&#8220;
+</p>
+</li>
+</ul>
+</li>
+<li><p>
+Zero or more headers consisting of a name and value separated by a colon
+</p>
+<ul>
+<li><p>
+Name: &#8220;Accept&#8221;, &#8220;Host&#8221;, or &#8220;Referer&#8220;
+</p>
+</li>
+</ul>
+<ul>
+<li><p>
+Value: One or more characters
+</p>
+</li>
+</ul>
+</li>
+<li><p>
+One blank line
+</p>
+</li>
+<li><p>
+A body consisting of zero or more characters
+</p>
+</li>
+</ul>
+<p>
+All characters will be considered 8-bit ASCII and all lines end with CRLF
+(characters 0x0D, 0x0A)
+</p>
+<pre>
+                                          
+</pre>
+<p>
+NOTE: A valid POST will contain a Content-Length header.  Since this header
+is not listed above we supress such errors unless asked to display them.
+</p>
+<pre>
+                                           </pre>
+
+		</div>
+
+		<!-- Constants -->
+		
+		<div id="constants-list" class="section">
+			<h3 class="section-header">Constants</h3>
+			<dl>
+			
+				<dt><a name="VALID_REQUEST">VALID_REQUEST</a></dt>
+				
+				<dd class="description"><p>
+Valid request methods
+</p></dd>
+				
+			
+				<dt><a name="VALID_HTTP_VERSION">VALID_HTTP_VERSION</a></dt>
+				
+				<dd class="description"><p>
+Valid HTTP version
+</p></dd>
+				
+			
+				<dt><a name="VALID_HEADER_NAME">VALID_HEADER_NAME</a></dt>
+				
+				<dd class="description"><p>
+Valid set of header names
+</p></dd>
+				
+			
+				<dt><a name="MIN_HEADER_VALUE_LENGTH">MIN_HEADER_VALUE_LENGTH</a></dt>
+				
+				<dd class="description"><p>
+Minimum length of a header value
+</p></dd>
+				
+			
+			</dl>
+		</div>
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="method-c-new"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new</span><span
+						class="method-args">(log, length_required = false)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Constructor:
+</p>
+<ul>
+<li><p>
+log: the logger
+</p>
+</li>
+<li><p>
+length_required: true if we require that POST requests contain a
+content-length header
+</p>
+</li>
+</ul>
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+    <span class="ruby-comment cmt"># File request_validator.rb, line 46</span>
+46:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">log</span>, <span class="ruby-identifier">length_required</span> = <span class="ruby-keyword kw">false</span>)
+47:     <span class="ruby-ivar">@log</span> = <span class="ruby-identifier">log</span>
+48:     <span class="ruby-ivar">@length_required</span> = <span class="ruby-identifier">length_required</span>
+49:     <span class="ruby-comment cmt"># The request parser</span>
+50:     <span class="ruby-ivar">@req</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPRequest</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>)
+51:     <span class="ruby-comment cmt"># Array of error messages describing errors found</span>
+52:     <span class="ruby-ivar">@errors</span> = []
+53:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="errors-method" class="method-detail ">
+				<a name="method-i-errors"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">errors</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Return array of errors (may be empty)
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="errors-source">
+<pre>
+     <span class="ruby-comment cmt"># File request_validator.rb, line 106</span>
+106:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">errors</span>
+107:     <span class="ruby-comment cmt"># Return array of error messages</span>
+108:     <span class="ruby-ivar">@errors</span>
+109:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="invalid-method" class="method-detail ">
+				<a name="method-i-invalid"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">invalid</span><span
+						class="method-args">(message)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Report an invalid file with reason
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="invalid-source">
+<pre>
+     <span class="ruby-comment cmt"># File request_validator.rb, line 180</span>
+180:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">invalid</span>(<span class="ruby-identifier">message</span>)
+181:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-identifier">message</span>
+182:     <span class="ruby-ivar">@errors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">message</span>
+183:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+184:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="valid-body--method" class="method-detail ">
+				<a name="method-i-valid_body%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">valid_body?</span><span
+						class="method-args">(body)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Body can be zero or more characters so nothing to test
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="valid-body--source">
+<pre>
+     <span class="ruby-comment cmt"># File request_validator.rb, line 174</span>
+174:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">valid_body?</span>(<span class="ruby-identifier">body</span>)
+175:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Null test for body&quot;</span>
+176:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+177:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="valid-header--method" class="method-detail ">
+				<a name="method-i-valid_header%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">valid_header?</span><span
+						class="method-args">(headers)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Validate header which contains zero or more key/value pairs of a specified
+set of header names whose values are of a specified length or longer
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="valid-header--source">
+<pre>
+     <span class="ruby-comment cmt"># File request_validator.rb, line 144</span>
+144:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">valid_header?</span>(<span class="ruby-identifier">headers</span>)
+145:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Validating headers: #{headers.inspect}&quot;</span>
+146:     <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-comment cmt"># Assume ok and prove invalid</span>
+147:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">invalid</span> <span class="ruby-value str">&quot;Incorrect argument&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>)
+148:     <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+149:       <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Validating header: name=#{name}, value=#{value.inspect}&quot;</span>
+150:       <span class="ruby-comment cmt"># An acceptably named header</span>
+151:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">VALID_HEADER_NAME</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">name</span>)
+152:         <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Header name is valid: #{name}&quot;</span>
+153:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Array</span>)
+154:           <span class="ruby-identifier">value</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+155:             <span class="ruby-comment cmt"># Validate length of each element of value array</span>
+156:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">MIN_HEADER_VALUE_LENGTH</span>
+157:               <span class="ruby-identifier">result</span> = <span class="ruby-identifier">invalid</span>(<span class="ruby-node">&quot;Value ('#{v}') for header '#{name}' too short at #{v.length} characters&quot;</span>)
+158:             <span class="ruby-keyword kw">end</span>
+159:           }
+160:         <span class="ruby-keyword kw">else</span>
+161:           <span class="ruby-identifier">result</span> = <span class="ruby-identifier">invalid</span>(<span class="ruby-node">&quot;Value for name, '#{name}', is not an array: #{value.inspect}&quot;</span>)
+162:         <span class="ruby-keyword kw">end</span>
+163:       <span class="ruby-keyword kw">else</span>
+164:         <span class="ruby-comment cmt"># Bogus header name</span>
+165:         <span class="ruby-identifier">result</span> = <span class="ruby-identifier">invalid</span>(<span class="ruby-node">&quot;Invalid header: #{name}&quot;</span>)
+166:       <span class="ruby-keyword kw">end</span>
+167:       }
+168:       
+169:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Header validation #{result ? 'successful' : 'failed'}&quot;</span>
+170:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>
+171:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="valid-http-version--method" class="method-detail ">
+				<a name="method-i-valid_http_version%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">valid_http_version?</span><span
+						class="method-args">(request_http_version)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Validate the HTTP version
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="valid-http-version--source">
+<pre>
+     <span class="ruby-comment cmt"># File request_validator.rb, line 122</span>
+122:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">valid_http_version?</span>(<span class="ruby-identifier">request_http_version</span>)
+123:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Validating HTTP version: #{request_http_version}&quot;</span>
+124:     <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">VALID_HTTP_VERSION</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">request_http_version</span>
+125:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">invalid</span>(<span class="ruby-node">&quot;Invalid HTTP request version: #{request_http_version}&quot;</span>)
+126:     <span class="ruby-keyword kw">end</span>
+127:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;HTTP version is valid&quot;</span>
+128:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+129:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="valid-request--method" class="method-detail ">
+				<a name="method-i-valid_request%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">valid_request?</span><span
+						class="method-args">(file_name)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Validate that all required request components are present and correct
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="valid-request--source">
+<pre>
+     <span class="ruby-comment cmt"># File request_validator.rb, line 56</span>
+ 56:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">valid_request?</span>(<span class="ruby-identifier">file_name</span>)
+ 57:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Validating #{file_name}&quot;</span>
+ 58:     <span class="ruby-identifier">valid</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-comment cmt"># Assume valid input until proven invalid</span>
+ 59:     <span class="ruby-ivar">@errors</span> = []
+ 60:     <span class="ruby-comment cmt"># Must be able to read the file</span>
+ 61:     <span class="ruby-identifier">valid</span> = <span class="ruby-identifier">invalid</span>(<span class="ruby-node">&quot;File not readable: #{file_name}&quot;</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">file_name</span>)
+ 62:     <span class="ruby-comment cmt"># File too small to contain valid input (s/b &lt; &quot;GET / HTTP/1.1&quot;.length?)</span>
+ 63:     <span class="ruby-identifier">valid</span> = <span class="ruby-identifier">invalid</span>(<span class="ruby-node">&quot;Zero length file: #{file_name}&quot;</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">size</span>(<span class="ruby-identifier">file_name</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+ 64:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">valid</span>
+ 65:       <span class="ruby-comment cmt"># Passed previous tests, proceed with parsing the file</span>
+ 66:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file_name</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">socket</span><span class="ruby-operator">|</span>
+ 67:         <span class="ruby-keyword kw">begin</span>
+ 68:           <span class="ruby-ivar">@req</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">socket</span>)
+ 69:           <span class="ruby-identifier">valid</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-identifier">valid_request_method?</span>(<span class="ruby-ivar">@req</span>.<span class="ruby-identifier">request_method</span>)
+ 70:           <span class="ruby-identifier">valid</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-identifier">valid_http_version?</span>(<span class="ruby-ivar">@req</span>.<span class="ruby-identifier">http_version</span>.<span class="ruby-identifier">to_s</span>)
+ 71:           <span class="ruby-identifier">valid</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-identifier">valid_header?</span>(<span class="ruby-ivar">@req</span>.<span class="ruby-identifier">header</span>)
+ 72:           <span class="ruby-keyword kw">begin</span>
+ 73:             <span class="ruby-comment cmt"># A valid POST request contains a content-length header but the spec does not</span>
+ 74:             <span class="ruby-comment cmt"># require one.  We catch the exception and emit an error message if allowed</span>
+ 75:             <span class="ruby-identifier">valid</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-identifier">valid_body?</span>(<span class="ruby-ivar">@req</span>.<span class="ruby-identifier">body</span>)
+ 76:           <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPStatus</span><span class="ruby-operator">::</span><span class="ruby-constant">LengthRequired</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+ 77:             <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@length_required</span>
+ 78:               <span class="ruby-identifier">valid</span> = <span class="ruby-keyword kw">false</span>
+ 79:               <span class="ruby-ivar">@errors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;Length header required for POST&quot;</span>
+ 80:             <span class="ruby-keyword kw">else</span>
+ 81:               <span class="ruby-identifier">valid</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-keyword kw">true</span>
+ 82:             <span class="ruby-keyword kw">end</span>
+ 83:           <span class="ruby-keyword kw">end</span>
+ 84:         <span class="ruby-comment cmt"># The request line (first line) is in error.  Since</span>
+ 85:         <span class="ruby-comment cmt"># parsing stops here, this is the only error we'll get</span>
+ 86:         <span class="ruby-comment cmt"># for this file</span>
+ 87:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPStatus</span><span class="ruby-operator">::</span><span class="ruby-constant">BadRequest</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+ 88:             <span class="ruby-identifier">valid</span> = <span class="ruby-keyword kw">false</span>
+ 89:             <span class="ruby-ivar">@errors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>
+ 90:         <span class="ruby-comment cmt"># Something unexpected happend so log it and continue</span>
+ 91:         <span class="ruby-comment cmt"># Note: this code is hard to test since it depends on</span>
+ 92:         <span class="ruby-comment cmt"># an unplanned error condition</span>
+ 93:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+ 94:           <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">error</span> <span class="ruby-node">&quot;Exception while processing #{file_name}: #{e.inspect}&quot;</span>
+ 95:           <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">error</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>
+ 96:           <span class="ruby-identifier">valid</span> = <span class="ruby-keyword kw">false</span>
+ 97:           <span class="ruby-ivar">@errors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>
+ 98:         <span class="ruby-keyword kw">end</span>
+ 99:       <span class="ruby-keyword kw">end</span>
+100:     <span class="ruby-keyword kw">end</span>
+101:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Validation of #{file_name} #{valid ? 'passed' : 'failed'}&quot;</span>
+102:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">valid</span>
+103:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="valid-request-method--method" class="method-detail ">
+				<a name="method-i-valid_request_method%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">valid_request_method?</span><span
+						class="method-args">(request_method)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Validate the HTTP request method
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="valid-request-method--source">
+<pre>
+     <span class="ruby-comment cmt"># File request_validator.rb, line 112</span>
+112:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">valid_request_method?</span>(<span class="ruby-identifier">request_method</span>)
+113:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Validating request method: #{request_method}&quot;</span>
+114:     <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">VALID_REQUEST</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">request_method</span>)
+115:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">invalid</span>(<span class="ruby-node">&quot;Invalid request method: #{request_method}&quot;</span>)
+116:     <span class="ruby-keyword kw">end</span>
+117:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;Request method is valid&quot;</span>
+118:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+119:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="valid-uri--method" class="method-detail ">
+				<a name="method-i-valid_uri%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">valid_uri?</span><span
+						class="method-args">(uri)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Valiate that the URI is relative and not absolute
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="valid-uri--source">
+<pre>
+     <span class="ruby-comment cmt"># File request_validator.rb, line 132</span>
+132:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">valid_uri?</span>(<span class="ruby-identifier">uri</span>)
+133:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Validating URI: #{uri}&quot;</span>
+134:     <span class="ruby-comment cmt"># URI required to be relative, reject absolute URI</span>
+135:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">invalid</span>(<span class="ruby-node">&quot;URI is not valid: #{uri}&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">uri</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/:\/\//</span> <span class="ruby-comment cmt"># Contains &quot;://&quot;</span>
+136:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">invalid</span>(<span class="ruby-value str">&quot;URI is empty&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">uri</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>
+137:     <span class="ruby-ivar">@log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;URI is valid&quot;</span>
+138:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+139:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

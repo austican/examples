@@ -1,0 +1,6 @@
+HEAD /some/place HTTP/1.1
+Accept: a_val
+Host: h_val
+Referer: r_val
+
+<html><head><title>Title</title></head><body><h1>Stuff</h1></body></html>

@@ -1,0 +1,8 @@
+GET /some/place HTTP/1.1
+junk stuff and noise
+Accept: a_val
+Host: h_val
+Referer: r_val
+How does this get here?
+
+<html><head><title>Title</title></head><body><h1>Stuff</h1></body></html>
