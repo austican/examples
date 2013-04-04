@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>File: simple_time.rb [RDoc Documentation]</title>
+
+	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+</head>
+
+<body class="file file-popup">
+	<div id="metadata">
+		<dl>
+			<dt class="modified-date">Last Modified</dt>
+			<dd class="modified-date">2013-04-03 18:50:35 -0500</dd>
+
+			
+			<dt class="requires">Requires</dt>
+			<dd class="requires">
+				<ul>
+				
+				</ul>
+			</dd>
+			
+
+			
+		</dl>
+	</div>
+
+	<div id="documentation">
+		
+		<div class="description">
+			<h2>Description</h2>
+			<p>
+<a href="SimpleTime.html">SimpleTime</a> provides a method, <a
+href="SimpleTime.html#method-c-add_minutes">SimpleTime::add_minutes</a>, to
+add a number of minutes to a time, where the time is given in a format like
+&#8220;HH:MM <A|P>M&#8221;.
+</p>
+<ul>
+<li><p>
+The leading hour is optional so &#8220;9:15 AM&#8221; is accepted.  The
+returned value mimics the input; a single digit hour is output if one is
+input, a two-digit is output if a two-digit hour is input.
+</p>
+</li>
+<li><p>
+The minutes must be 2 digits.
+</p>
+</li>
+<li><p>
+The input&#8217;s AM/PM indicator is case-insensitive and the output
+mirrors the input&#8217;s case even if there is a change from AM to PM.
+</p>
+</li>
+<li><p>
+The number of minutes to add is either an Integer a class that derives from
+Integer.  The value can be positive or negative.
+</p>
+</li>
+<li><p>
+The calculation wraps around the clock. Adding a week to 10:00 AM will
+result in 10:00 AM.
+</p>
+</li>
+</ul>
+<p>
+As described in <a
+href="http://en.wikipedia.org/wiki/12-hour_clock">en.wikipedia.org/wiki/12-hour_clock</a>,
+&#8216;12:00 AM&#8217; is  midnight, not 00:00 and a &#8220;0&#8221; hour
+is not accepted.
+</p>
+
+		</div>
+		
+	</div>
+</body>
+</html>
+

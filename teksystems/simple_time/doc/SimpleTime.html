@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: SimpleTime</title>
+
+	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="./simple_time_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="simple_time.rb">simple_time.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">Object</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-c-add_minutes">::add_minutes</a></li>
+					
+					<li><a href="#method-c-case_like">::case_like</a></li>
+					
+					<li><a href="#method-c-to_minutes">::to_minutes</a></li>
+					
+					<li><a href="#method-c-to_string">::to_string</a></li>
+					
+					<li><a href="#method-c-validate">::validate</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./README.html">README</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./SimpleTime.html">SimpleTime</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">SimpleTime</h1>
+
+		<div id="description">
+			<p>
+<a href="SimpleTime.html">SimpleTime</a> provides a method, <a
+href="SimpleTime.html#method-c-add_minutes">SimpleTime::add_minutes</a>, to
+add a number of minutes to a time, where the time is given in a format like
+&#8220;HH:MM <A|P>M&#8221;.
+</p>
+<ul>
+<li><p>
+The leading hour is optional so &#8220;9:15 AM&#8221; is accepted.  The
+returned value mimics the input; a single digit hour is output if one is
+input, a two-digit is output if a two-digit hour is input.
+</p>
+</li>
+<li><p>
+The minutes must be 2 digits.
+</p>
+</li>
+<li><p>
+The input&#8217;s AM/PM indicator is case-insensitive and the output
+mirrors the input&#8217;s case even if there is a change from AM to PM.
+</p>
+</li>
+<li><p>
+The number of minutes to add is either an Integer a class that derives from
+Integer.  The value can be positive or negative.
+</p>
+</li>
+<li><p>
+The calculation wraps around the clock. Adding a week to 10:00 AM will
+result in 10:00 AM.
+</p>
+</li>
+</ul>
+<p>
+As described in <a
+href="http://en.wikipedia.org/wiki/12-hour_clock">en.wikipedia.org/wiki/12-hour_clock</a>,
+&#8216;12:00 AM&#8217; is  midnight, not 00:00 and a &#8220;0&#8221; hour
+is not accepted.
+</p>
+
+		</div>
+
+		<!-- Constants -->
+		
+		<div id="constants-list" class="section">
+			<h3 class="section-header">Constants</h3>
+			<dl>
+			
+				<dt><a name="HOURS_PER_DAY">HOURS_PER_DAY</a></dt>
+				
+				<dd class="description"><p>
+Days on Earth have ~24 hours
+</p></dd>
+				
+			
+				<dt><a name="MINUTES_PER_HOUR">MINUTES_PER_HOUR</a></dt>
+				
+				<dd class="description"><p>
+Always 60 minutes per hour (even on Gallifrey?)
+</p></dd>
+				
+			
+				<dt><a name="MINUTES_PER_DAY">MINUTES_PER_DAY</a></dt>
+				
+				<dd class="description"><p>
+Minutes in a day
+</p></dd>
+				
+			
+				<dt><a name="MAX_HOUR">MAX_HOUR</a></dt>
+				
+				<dd class="description"><p>
+Maximum hour value allowed in input
+</p></dd>
+				
+			
+				<dt><a name="MAX_MINUTE">MAX_MINUTE</a></dt>
+				
+				<dd class="description"><p>
+Maximum minute value allowed in input
+</p></dd>
+				
+			
+			</dl>
+		</div>
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="add-minutes-method" class="method-detail ">
+				<a name="method-c-add_minutes"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">add_minutes</span><span
+						class="method-args">(time_string, minutes)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Add minutes to a time string in the format &#8217;{H}H:MM {A|P}M&#8217;
+</p>
+<dl>
+<dt>time_string</dt><dd><p>
+the string to be added
+</p>
+</dd>
+<dt>minutes</dt><dd><p>
+the number of minutes to add
+</p>
+</dd>
+</dl>
+<p>
+Exceptions: ArgumentError when inputs are invalid
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="add-minutes-source">
+<pre>
+    <span class="ruby-comment cmt"># File simple_time.rb, line 20</span>
+20:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">add_minutes</span>(<span class="ruby-identifier">time_string</span>, <span class="ruby-identifier">minutes</span>)
+21:     <span class="ruby-comment cmt"># Validate inputs</span>
+22:     <span class="ruby-identifier">time_string</span>, <span class="ruby-identifier">minutes</span> = <span class="ruby-identifier">validate</span>(<span class="ruby-identifier">time_string</span>, <span class="ruby-identifier">minutes</span>)
+23:     <span class="ruby-comment cmt"># Convert time_string to minutes</span>
+24:     <span class="ruby-identifier">ts_minutes</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_minutes</span>(<span class="ruby-identifier">time_string</span>)
+25:     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Invalid time string: '#{time_string}'&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ts_minutes</span>.<span class="ruby-identifier">nil?</span>
+26:     <span class="ruby-comment cmt"># Add minutes</span>
+27:     <span class="ruby-identifier">ts_minutes</span>[<span class="ruby-value">:total_minutes</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">minutes</span>
+28:     <span class="ruby-comment cmt"># Convert back to time_string format</span>
+29:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_string</span>(<span class="ruby-identifier">ts_minutes</span>)
+30:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="private-class-method-details" class="method-section section">
+			<h3 class="section-header">Private Class Methods</h3>
+
+		
+			<div id="case-like-method" class="method-detail ">
+				<a name="method-c-case_like"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">case_like</span><span
+						class="method-args">(pattern, target)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Make the target conform to the same case as the pattern for each character
+</p>
+<dl>
+<dt>pattern</dt><dd><p>
+a string that determines the case of the target
+</p>
+</dd>
+<dt>target</dt><dd><p>
+a string whose characters will be set to the same case as the pattern
+</p>
+</dd>
+</dl>
+<p>
+Exception: ArgumentError raised if the strings are of unequal length
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="case-like-source">
+<pre>
+    <span class="ruby-comment cmt"># File simple_time.rb, line 68</span>
+68:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">case_like</span>(<span class="ruby-identifier">pattern</span>, <span class="ruby-identifier">target</span>)
+69:     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Different lengths: '#{pattern}', #{target}'&quot;</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">length</span>
+70:     <span class="ruby-identifier">result</span> = <span class="ruby-value str">''</span>
+71:     <span class="ruby-identifier">target_chars</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">//</span>)
+72:     <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">//</span>).<span class="ruby-identifier">each_index</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+73:       <span class="ruby-identifier">original_char</span> = <span class="ruby-identifier">pattern</span>[<span class="ruby-identifier">i</span>]
+74:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pattern</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">pattern</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">upcase</span>
+75:         <span class="ruby-identifier">target_chars</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">upcase!</span>
+76:       <span class="ruby-keyword kw">else</span>
+77:         <span class="ruby-identifier">target_chars</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">downcase!</span>
+78:       <span class="ruby-keyword kw">end</span>      
+79:       }
+80:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">target_chars</span>.<span class="ruby-identifier">join</span>
+81:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="to-minutes-method" class="method-detail ">
+				<a name="method-c-to_minutes"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">to_minutes</span><span
+						class="method-args">(time_string)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Convert a string in the form &#8217;{H}H:MM {A|P}M&#8217; to minutes in the
+day
+</p>
+<ul>
+<li><p>
+Returns the number of minutes, or nil if the input is invalid
+</p>
+</li>
+</ul>
+<dl>
+<dt>time_string</dt><dd><p>
+the string containing the time to convert
+</p>
+</dd>
+</dl>
+<p>
+Exception: ArgumentError if the hour or minute values are incorrect
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="to-minutes-source">
+<pre>
+     <span class="ruby-comment cmt"># File simple_time.rb, line 88</span>
+ 88:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_minutes</span>(<span class="ruby-identifier">time_string</span>)
+ 89:     <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">nil</span>
+ 90:     <span class="ruby-comment cmt"># Parse into hours, minutes and case insensitive am/pm</span>
+ 91:     <span class="ruby-regexp re">/^\s*([01]?\d):(\d{2})\s*(?i:([ap]m))/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">time_string</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span>
+ 92:       <span class="ruby-identifier">hour_length</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">length</span>
+ 93:       <span class="ruby-identifier">hour</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>
+ 94:       <span class="ruby-identifier">minute</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_i</span>
+ 95:       <span class="ruby-identifier">meridiem</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">3</span>]
+ 96:       
+ 97:       <span class="ruby-comment cmt"># Adjustment factor to go from 12 hour AM/PM period to 24 hour period</span>
+ 98:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;invalid hour&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hour</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">MAX_HOUR</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">hour</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+ 99:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;invalid minute&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">minute</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">MAX_MINUTE</span>
+100:       
+101:       <span class="ruby-identifier">is_am</span> = <span class="ruby-identifier">meridiem</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'AM'</span>
+102:       
+103:       <span class="ruby-comment cmt"># Convert hour to 24 hour format</span>
+104:       <span class="ruby-identifier">hour</span> =  <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">hour</span> <span class="ruby-operator">==</span> <span class="ruby-constant">MAX_HOUR</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">is_am</span>) <span class="ruby-comment cmt"># 12 AM</span>
+105:       <span class="ruby-identifier">hour</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">MAX_HOUR</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">hour</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">MAX_HOUR</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">is_am</span>) <span class="ruby-comment cmt"># Afternoon, not 12 PM</span>
+106: 
+107:       <span class="ruby-comment cmt"># Calculate the total</span>
+108:       <span class="ruby-identifier">total_minutes</span> = (<span class="ruby-identifier">hour</span> * <span class="ruby-constant">MINUTES_PER_HOUR</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">minute</span>)
+109:       <span class="ruby-comment cmt"># Package result</span>
+110:       <span class="ruby-identifier">result</span> = {<span class="ruby-value">:total_minutes</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">total_minutes</span>, <span class="ruby-value">:hour_length</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">hour_length</span>, <span class="ruby-value">:meridiem</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">meridiem</span>}
+111:       }
+112:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>
+113:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="to-string-method" class="method-detail ">
+				<a name="method-c-to_string"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">to_string</span><span
+						class="method-args">(ts_minutes)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Convert an integer representing the minutes in the day to a string like
+&#8217;{H}H:MM {A|P}M&#8217;
+</p>
+<ul>
+<li><p>
+The number of hour digits is the same as the input if possible
+</p>
+</li>
+<li><p>
+The case of the meridium is the same as the input
+</p>
+</li>
+</ul>
+<dl>
+<dt>ts_minutes</dt><dd><p>
+A hash containing:
+</p>
+</dd>
+<dt>:total_minutes</dt><dd><p>
+The minutes to be converted
+</p>
+</dd>
+<dt>:hour_length</dt><dd><p>
+The number of digits to format the hour
+</p>
+</dd>
+<dt>:meridiem</dt><dd><p>
+The pattern of upper/lower case letters to use for formatting the meridiem
+</p>
+</dd>
+</dl>
+					
+
+					
+					<div class="method-source-code"
+						id="to-string-source">
+<pre>
+     <span class="ruby-comment cmt"># File simple_time.rb, line 123</span>
+123:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_string</span>(<span class="ruby-identifier">ts_minutes</span>)
+124:     <span class="ruby-identifier">minutes</span> = <span class="ruby-identifier">ts_minutes</span>[<span class="ruby-value">:total_minutes</span>]
+125:     <span class="ruby-comment cmt"># Reduce to a 24 hour period</span>
+126:     <span class="ruby-identifier">minutes</span> = <span class="ruby-identifier">minutes</span> <span class="ruby-operator">%</span> <span class="ruby-constant">MINUTES_PER_DAY</span>
+127:     <span class="ruby-comment cmt"># Total hours</span>
+128:     <span class="ruby-identifier">hours</span> = <span class="ruby-identifier">minutes</span> <span class="ruby-operator">/</span> <span class="ruby-constant">MINUTES_PER_HOUR</span>
+129:     <span class="ruby-comment cmt"># Adjusted hours, 0 - 12</span>
+130:     <span class="ruby-identifier">hr</span> = <span class="ruby-identifier">hours</span> <span class="ruby-operator">%</span> <span class="ruby-constant">MAX_HOUR</span>
+131:     <span class="ruby-identifier">hr</span> = <span class="ruby-value">12</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hr</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+132:     <span class="ruby-comment cmt"># Remaining minutes</span>
+133:     <span class="ruby-identifier">min</span> = <span class="ruby-identifier">minutes</span> <span class="ruby-operator">%</span> <span class="ruby-constant">MINUTES_PER_HOUR</span>
+134:     
+135:     <span class="ruby-comment cmt"># Format preparation</span>
+136:     <span class="ruby-identifier">hour_format</span> = (<span class="ruby-identifier">ts_minutes</span>[<span class="ruby-value">:hour_length</span>] <span class="ruby-operator">==</span> <span class="ruby-value">1</span>) <span class="ruby-operator">?</span> <span class="ruby-value str">&quot;%d&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;%02d&quot;</span>
+137:     <span class="ruby-comment cmt"># AM/PM</span>
+138:     <span class="ruby-identifier">am_pm</span> = <span class="ruby-identifier">hours</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-constant">MAX_HOUR</span> <span class="ruby-operator">?</span> <span class="ruby-value str">'PM'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'AM'</span>
+139:     <span class="ruby-identifier">am_pm</span> = <span class="ruby-identifier">case_like</span>(<span class="ruby-identifier">ts_minutes</span>[<span class="ruby-value">:meridiem</span>], <span class="ruby-identifier">am_pm</span>)
+140:     <span class="ruby-identifier">result</span> = <span class="ruby-node">&quot;#{hour_format % hr}:#{&quot;%02d&quot; % min} #{am_pm}&quot;</span>
+141:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>
+142:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="validate-method" class="method-detail ">
+				<a name="method-c-validate"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">validate</span><span
+						class="method-args">(time_string, minutes)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Assure the input parameters are usable, returning them, converted if
+necessary.
+</p>
+<dl>
+<dt>time_string</dt><dd><p>
+a non-nill string (parsing is not done here)
+</p>
+</dd>
+<dt>minutes</dt><dd><p>
+an Integer or something thart can be converted to one.
+</p>
+</dd>
+</dl>
+<p>
+Exceptions: ArgumentError if an argument is invalid
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="validate-source">
+<pre>
+    <span class="ruby-comment cmt"># File simple_time.rb, line 54</span>
+54:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">validate</span>(<span class="ruby-identifier">time_string</span>, <span class="ruby-identifier">minutes</span>)
+55:     <span class="ruby-comment cmt"># Assure that the time_string is a non-nil string</span>
+56:     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;time is not a string&quot;</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">time_string</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">String</span>
+57:     <span class="ruby-comment cmt"># Assure that the minutes is an Integer or can be converted</span>
+58:     <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">minutes</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Integer</span>
+59:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;minutes is not an Integer and could not be converted to one: #{minutes}&quot;</span>)
+60:     <span class="ruby-keyword kw">end</span>
+61:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">time_string</span>, <span class="ruby-identifier">minutes</span>
+62:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
